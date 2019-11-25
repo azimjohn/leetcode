@@ -10,18 +10,18 @@ class ListNode:
 
 class Solution:
     def mergeKLists(self, lists):
-        if not any(lists):
-            return
-
-        smallest_index = self.get_smallest_index(lists)
-        merged_list = lists[smallest_index]
-        merged_list_head = merged_list
-        lists[smallest_index] = lists[smallest_index].next
+        merged_list = None
+        merged_list_head = None
 
         while any(lists):
             smallest_index = self.get_smallest_index(lists)
-            merged_list.next = lists[smallest_index]
-            merged_list = merged_list.next
+            if not merged_list:
+                merged_list = lists[smallest_index]
+                merged_list_head = merged_list
+            else:
+                merged_list.next = lists[smallest_index]
+                merged_list = merged_list.next
+
             lists[smallest_index] = lists[smallest_index].next
 
         return merged_list_head
