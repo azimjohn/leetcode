@@ -4,10 +4,13 @@ class ListNode:
         self.val = x
         self.next = None
 
-
 class Solution:
     def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
         length = self.getLength(head)
+
+        if n == 1 and length == 1:
+            return None
+
         return self.removeNthElement(head, length - n)
 
     def removeNthElement(self, head: ListNode, n: int) -> ListNode:
