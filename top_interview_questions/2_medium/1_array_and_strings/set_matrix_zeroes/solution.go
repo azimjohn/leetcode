@@ -1,6 +1,8 @@
-func setZeroes(matrix [][]int)  {
-    zeroCols := make(map[int]bool)
-    zeroRows := make(map[int]bool)
+package main
+
+func setZeroes(matrix [][]int) {
+	zeroCols := make(map[int]bool)
+	zeroRows := make(map[int]bool)
 	numCols, numRows := len(matrix), len(matrix[0])
 
 	for i, col := range matrix {
@@ -13,7 +15,7 @@ func setZeroes(matrix [][]int)  {
 	}
 
 	for col, _ := range zeroCols {
-		for row:=0; row < numRows; row++ {
+		for row := 0; row < numRows; row++ {
 			matrix[col][row] = 0
 		}
 	}
