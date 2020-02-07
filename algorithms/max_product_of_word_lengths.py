@@ -1,20 +1,19 @@
 class Solution:
-    """ Complexity: len(word) * (len(words) ** 2), todo: it could be better """
-    wordset = None
+    word_mask = {}
 
     def maxProduct(self, words: List[str]) -> int:
-        self.wordset = [set(word) for word in words]
+        self.word_mask = {word: self.mask(word) for word in words}
         global_max = 0
 
-        for index_one, word_one in enumerate(words):
-            for index_two, word_two in enumerate(words):
-                if self.isValid(index_one, index_two):
+        for word_one, mask_one in self.word_mask.items():
+            for word_two, mask_two in self.word_mask.items():
+                if self.isValid(mask_one, mask_two):
                     global_max = max(global_max, len(word_one) * len(word_two))
 
         return global_max
 
-    def isValid(self, index_one, index_two):
-        wordset_one = self.wordset[index_one]
-        wordset_two = self.wordset[index_two]
+    def isValid(self, mask_one, mask_two):
+        return mask_one & mask_two == 0
 
-        return not bool(wordset_one.intersection(wordset_two))
+    def mask(word: str) -> int:
+        return
