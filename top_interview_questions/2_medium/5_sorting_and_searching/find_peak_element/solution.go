@@ -6,7 +6,7 @@ func main() {
 
 func findPeakElement(nums []int) int {
 	left := 0
-	right := len(nums)
+	right := len(nums) - 1
 
 	for left < right {
 		mid := (left + right) / 2
