@@ -1,14 +1,20 @@
 class FirstUnique:
+
     def __init__(self, nums: List[int]):
         self.counter = collections.Counter(nums)
-        self.queue = collections.deque(nums)
+        self.unique = {n: True for n in self.counter if self.counter[n] == 1}
 
     def showFirstUnique(self) -> int:
-        while self.queue and self.counter[self.queue[0]] != 1:
-            self.queue.popleft()
-        
-        return self.queue[0] if self.queue else -1
+        try:
+            return next(iter(self.unique))
+        except StopIteration:
+            return -1
 
     def add(self, value: int) -> None:
-        self.queue.append(value)
+        if self.counter[value] == 0:
+            self.unique[value] = True
+
+        if self.counter[value] == 1:
+            del self.unique[value]
+
         self.counter[value] += 1
